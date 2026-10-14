@@ -7,7 +7,7 @@
 
 测试机：**华为 Pura 70 Pro+（麒麟 9010）**，HarmonyOS NEXT，普通三方签名、无 root。
 
-[![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 ![Platform](https://img.shields.io/badge/platform-HarmonyOS%20NEXT-green)
 ![Chip](https://img.shields.io/badge/chip-Kirin%209010-orange)
 
@@ -210,6 +210,7 @@ python verify/verify_qproj_numeric.py
 
 ## 许可
 
-[Apache-2.0](LICENSE)。第三方来源与致谢见 [`NOTICE`](NOTICE)。
+[MIT](LICENSE)。第三方来源与致谢见 [`NOTICE`](NOTICE)。
 
-本项目是「灵枢 LingShu」民生 AI 助手（光谷杯鸿蒙创新赛参赛作品）的 NPU 研究副产品。
+本仓库来自「灵枢 LingShu」项目参加**光谷杯鸿蒙创新赛**期间，在麒麟 9010 上做端侧 NPU 适配的**技术侧探索记录**。
+其中的算子边界结论、500 倍性能发现与数值验证方法**均可独立复现**，与比赛评审内容无关。
