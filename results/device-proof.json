@@ -1,0 +1,69 @@
+{
+  "_comment": "LingShu on-device NPU proof ledger. Records what has actually been executed on the real phone, with the raw evidence string. Update only when a NEW artifact is proven; never mark something proven from a desktop-side result alone.",
+  "device": {
+    "model": "HUAWEI Pura 70 Pro+ (HBN-AL10)",
+    "soc": "Kirin 9010",
+    "hdc_id": "<device-id>",
+    "hiai_version": "106.636.120.010",
+    "syscaps": {
+      "SystemCapability.AI.CANN.LLMEngine": false,
+      "SystemCapability.AI.HiAIFoundation": true,
+      "SystemCapability.AI.MindSporeLite": true
+    }
+  },
+  "proven": [
+    {
+      "artifact": "官方 codelab hiai.om (SqueezeNet, 2438 KB, IMOD)",
+      "route": "HiAI Foundation: ConstructWithOfflineModelBuffer + SetModelDeviceOrder(NPU)",
+      "evidence": "compatibility=0 SetDevice=SUCCESS Build=SUCCESS 30ms RunSync=SUCCESS 2ms; out[0] n=1000 sum=0.998 max=0.123 NON_ZERO; CPU order control RunSync=10ms sum=1.000 -> NPU about 5x faster",
+      "verdict": "NPU compute really happens"
+    },
+    {
+      "artifact": "codex tiny_conv.om (1462 B, IMOD, produced by HiAI DDK omg from our own ONNX)",
+      "route": "same HiAI route, our own artifact",
+      "evidence": "model_bytes=1462 compatibility=0 SetDevice=SUCCESS SetBandMode=SUCCESS SetModelDeviceOrder(NPU)=SUCCESS Build=SUCCESS 9ms RunSync=SUCCESS 1ms out[0] n=64 sum=160.0 max=4.0 NON_ZERO; CPU control Build=1ms RunSync=0ms",
+      "verdict": "our own .om loads and executes; the full desktop-to-device chain works"
+    }
+  ],
+  "pending": [
+    {
+      "artifact": "qwen_s8.om (1027575060 B, IMOD) phone-side Build + NPU RunSync",
+      "reason": "artifact exists on the PC and passed omg conversion (exit 0); the phone was not attached at conversion time",
+      "how": "run test-big-om.ps1 with the phone attached; it learns the sandbox path from the app log, pushes the model, relaunches and captures the probe output"
+    },
+    {
+      "artifact": "NPU vs CPU device-order timing on a real LLM .om",
+      "reason": "depends on the item above; also note qwen_s8.om is fixed batch=1 seq=8 with no KV cache, so it cannot evidence chat throughput"
+    }
+  ],
+  "disproven": [
+    {
+      "artifact": "MindSpore Lite .ms + Context{target:['nnrt']}",
+      "evidence": "nnrt_dev0: predict ok 2ms out=[0,0,0,0] => MISMATCH; SELinux denies nnrt_device_service (tcontext=hdf_socslt_service, permissive=0), RegisterBackend failed",
+      "verdict": "unusable: load 'succeeds' but no compute happens"
+    },
+    {
+      "artifact": "raw NNRt with an in-memory Add graph (OH_NNCompilation_*)",
+      "evidence": "HandleAppDied bN=com.lingshu.smart about 1.4s after the call",
+      "verdict": "crashes the app process"
+    }
+  ],
+  "desktopOnly": {
+    "note": "proven on the PC only; NOT yet executed on the phone",
+    "items": [
+      {
+        "artifact": "qwen_s8.om (1,027,575,060 B, IMOD)",
+        "proof": "OMG generate offline model success, exit 0; produced by HiAI DDK omg from a repaired Qwen2.5-0.5B ONNX",
+        "not-proven": "phone-side Build / NPU RunSync; fixed batch=1 seq=8; no KV cache so not a chat-performance claim"
+      },
+      {
+        "artifact": "probe ONNX isolation series",
+        "proof": "opset 18 OK, symbolic dims OK, Identity FAILS, empty-shape ConstantOfShape FAILS and is the Qwen trigger"
+      }
+    ]
+  },
+  "tooling": {
+    "hiai_ddk": "DDK-tools-next-6.1.1.0 (sha256 verified 87d7e3f186ad5c527a9385cea555559ea53c63b87dc483820523bcf7bf6f87e5)",
+    "omg": "linux-ddk/DDK-tools-next-6.1.1.0/tools/tools_omg/master/omg (run via /lib64/ld-linux-x86-64.so.2)"
+  }
+}

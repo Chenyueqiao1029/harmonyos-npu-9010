@@ -1,0 +1,52 @@
+# NOTICE
+
+灵枢 · 鸿蒙端侧 NPU 算子实战（lingshu-npu-ops）
+Copyright 2026 徐子涵 / 灵枢 LingShu 项目
+
+本产品包含由第三方开发的软件。以下为相关声明与致谢。
+
+---
+
+## 1. HiAI Foundation 调用序列的来源
+
+`runner/hiai_om_napi.cpp` 中使用的 API 调用序列（兼容性检查 → 离线模型构造 →
+设备枚举 → 带宽模式设置 → 执行设备序设置 → 编译 → 执行器 → 同步执行），
+**遵循华为官方示例工程与公开 API 文档所定义的用法**：
+
+- 华为官方 codelab：`hiaifoundationkit-codelab-clientdemo-cpp`
+- HarmonyOS 开发者文档 —— CANN Kit / HiAI Foundation 相关章节
+
+按公开文档使用其公开 API 是这些 API 的设计用途。
+本仓库中的**代码实现、诊断逻辑、判据设计、注释与文档均为本项目原创**，
+与上述示例工程不存在逐字复制的代码关系。
+
+**华为、HarmonyOS、麒麟、CANN、HiAI 是华为技术有限公司的商标或注册商标。**
+本项目与华为技术有限公司无隶属或背书关系。
+
+## 2. 运行环境依赖（未随本仓库分发）
+
+以下组件**不在本仓库内**，使用者需自行从其官方渠道获取并遵守各自的许可：
+
+| 组件 | 说明 |
+|---|---|
+| HiAI DDK（含 `omg` 离线模型转换工具） | 华为专有工具，**不可再分发**。本仓库的 `convert_*.sh` 假定你已自行安装 |
+| HarmonyOS SDK / DevEco Studio | 提供 `hiai_foundation/*.h`、`neural_network_runtime/*.h` 等头文件 |
+| Qwen2.5-0.5B 模型权重 | 由阿里巴巴发布（Apache-2.0）。本仓库不包含任何权重文件 |
+
+## 3. 未包含的第三方代码
+
+- **`libnpu_llama.so` / `npu_llama_napi.cpp`（llama.cpp 的 HarmonyOS 移植）**：
+  本项目曾用它做 CPU 端侧推理基线，但其来源与许可状况未经核实，**故不纳入本仓库**。
+  如需 CPU 端侧推理，请直接使用上游 [llama.cpp](https://github.com/ggml-org/llama.cpp)（MIT）。
+- 灵枢 App 的业务代码：属参赛作品，未纳入。
+
+## 4. 数据来源说明
+
+`results/` 下的 JSON 与 `docs/` 下的数字 **均来自本项目在真机上实测的原始输出**，
+不是文档推断、不是估算。每处结论均可在 `docs/` 中找到对应的实验记录。
+
+## 5. 致谢
+
+- 华为 HarmonyOS 团队提供的 HiAI Foundation / CANN 能力与文档
+- [llama.cpp](https://github.com/ggml-org/llama.cpp) 项目（MIT），端侧 CPU 推理的参考实现
+- 阿里巴巴通义千问团队，Qwen2.5-0.5B（Apache-2.0）

@@ -1,0 +1,152 @@
+[
+  {
+    "name": "u1_cos",
+    "inputs": {
+      "x": [
+        4,
+        8
+      ]
+    },
+    "shape": [
+      4,
+      8
+    ],
+    "nodes": [],
+    "oracle": {}
+  },
+  {
+    "name": "u2_sin",
+    "inputs": {
+      "x": [
+        4,
+        8
+      ]
+    },
+    "shape": [
+      4,
+      8
+    ],
+    "nodes": [],
+    "oracle": {}
+  },
+  {
+    "name": "u3_neg",
+    "inputs": {
+      "x": [
+        4,
+        8
+      ]
+    },
+    "shape": [
+      4,
+      8
+    ],
+    "nodes": [],
+    "oracle": {}
+  },
+  {
+    "name": "u4_less",
+    "inputs": {
+      "x": [
+        4,
+        8
+      ]
+    },
+    "shape": [
+      4,
+      8
+    ],
+    "nodes": [],
+    "oracle": {}
+  },
+  {
+    "name": "u5_and",
+    "inputs": {
+      "x": [
+        4,
+        8
+      ]
+    },
+    "shape": [
+      4,
+      8
+    ],
+    "nodes": [],
+    "oracle": {}
+  },
+  {
+    "name": "u7_expand",
+    "inputs": {
+      "x": [
+        4,
+        8
+      ]
+    },
+    "shape": [
+      4,
+      8
+    ],
+    "nodes": [],
+    "oracle": {}
+  },
+  {
+    "name": "u8_flatten",
+    "inputs": {
+      "x": [
+        4,
+        8
+      ]
+    },
+    "shape": [
+      4,
+      8
+    ],
+    "nodes": [],
+    "oracle": {}
+  },
+  {
+    "name": "u9_sigmoid",
+    "inputs": {
+      "x": [
+        4,
+        8
+      ]
+    },
+    "shape": [
+      4,
+      8
+    ],
+    "nodes": [],
+    "oracle": {}
+  },
+  {
+    "name": "u10_softmax",
+    "inputs": {
+      "x": [
+        4,
+        8
+      ]
+    },
+    "shape": [
+      4,
+      8
+    ],
+    "nodes": [],
+    "oracle": {}
+  },
+  {
+    "name": "u11_slice",
+    "inputs": {
+      "x": [
+        4,
+        8
+      ]
+    },
+    "shape": [
+      4,
+      8
+    ],
+    "nodes": [],
+    "oracle": {}
+  }
+]

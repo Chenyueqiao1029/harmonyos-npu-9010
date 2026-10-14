@@ -1,0 +1,18 @@
+[
+  {
+    "file": "<workdir>\\om\\tiny_conv.om",
+    "bytes": 1462,
+    "magic_ascii": "IMOD",
+    "sha256": "bccc0fe60b2fbbd66e1ec2a112e192a608eee85709494b9c2377c17569bd93a6",
+    "conversion": "OMG success on WSL x86_64, no Ascend device",
+    "device_execution": "pending"
+  },
+  {
+    "file": "<workdir>\\om\\tiny_gemm.om",
+    "bytes": 1605,
+    "magic_ascii": "IMOD",
+    "sha256": "ed730853eb94fbb541bb1eaacb9842132c3deab87293df2f3f55c525fd3fc6af",
+    "conversion": "OMG success on WSL x86_64, no Ascend device",
+    "device_execution": "pending"
+  }
+]
